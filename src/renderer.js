@@ -11,6 +11,18 @@ const MODES = [
 
 let cur = null;
 let running = false;
+let cookieFile = '';
+
+// Selector de cookies: "Archivo cookies.txt..." abre el dialogo
+$('#ckBrowser').addEventListener('change', async (e) => {
+  if (e.target.value === 'file') {
+    const f = await window.nagi.pickCookies();
+    if (f) { cookieFile = f; $('#ckFile').textContent = '✓ ' + f.split(/[\\/]/).pop(); $('#ckCookies').checked = true; }
+    else { cookieFile = ''; $('#ckFile').textContent = ''; e.target.value = 'brave'; }
+  } else {
+    cookieFile = ''; $('#ckFile').textContent = '';
+  }
+});
 
 // ---------- rejilla ----------
 const grid = $('#grid');
@@ -71,7 +83,11 @@ $('#runBtn').addEventListener('click', async () => {
   await window.nagi.download({
     urls, fmt: cur.fmt, multi: cur.multi, scrape: cur.scrape,
     album: cur.album ? $('#albumInput').value : '',
-    cookies: { enabled: $('#ckCookies').checked, browser: $('#ckBrowser').value }
+    cookies: {
+      enabled: $('#ckCookies').checked,
+      browser: $('#ckBrowser').value === 'file' ? 'brave' : $('#ckBrowser').value,
+      file: ($('#ckBrowser').value === 'file') ? cookieFile : ''
+    }
   });
 
   running = false;

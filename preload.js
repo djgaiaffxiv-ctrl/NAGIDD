@@ -5,6 +5,7 @@ contextBridge.exposeInMainWorld('nagi', {
   // descargas
   download: (payload) => ipcRenderer.invoke('download', payload),
   cancel: () => ipcRenderer.invoke('cancel'),
+  pickCookies: () => ipcRenderer.invoke('pick-cookies'),
   copyFails: () => ipcRenderer.invoke('copy-fails'),
   openFolder: () => ipcRenderer.invoke('open-folder'),
 

@@ -64,8 +64,14 @@
       <div class="opt-row inline">
         <label class="chk"><input type="checkbox" id="ckCookies" /> Privado / con login &mdash; usar cookies de:</label>
         <select id="ckBrowser">
-          <option>Brave</option><option>Chrome</option><option>Edge</option><option>Firefox</option><option>Opera</option>
+          <option value="brave">Brave</option>
+          <option value="chrome">Chrome</option>
+          <option value="edge">Edge</option>
+          <option value="firefox">Firefox</option>
+          <option value="opera">Opera</option>
+          <option value="file">Archivo cookies.txt...</option>
         </select>
+        <span id="ckFile" class="hint"></span>
       </div>
 
       <div class="run-row">

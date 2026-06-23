@@ -80,6 +80,14 @@ ipcMain.handle('win:maximize', () => { if (!win) return false; if (win.isMaximiz
 ipcMain.handle('win:close', () => { win && win.close(); });
 ipcMain.handle('open-folder', () => { shell.openPath(engine.OUT); });
 ipcMain.handle('cancel', () => { engine.cancel(); });
+ipcMain.handle('pick-cookies', async () => {
+  const r = await dialog.showOpenDialog(win, {
+    title: 'Elige el archivo cookies.txt',
+    filters: [{ name: 'cookies.txt', extensions: ['txt'] }],
+    properties: ['openFile']
+  });
+  return r.canceled ? null : r.filePaths[0];
+});
 ipcMain.handle('copy-fails', () => {
   if (!lastFails) { clipboard.writeText('NAGIDD: no hay videos con error en la ultima descarga.'); return; }
   clipboard.writeText(lastFails);
