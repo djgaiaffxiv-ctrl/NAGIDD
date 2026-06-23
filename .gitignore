@@ -1,0 +1,14 @@
+node_modules/
+dist/
+bin/
+Descargas/
+Descargador.ps1
+NAGIDD.ico
+NAGIDD.png
+nagi-mark.png
+_*.js
+_*.txt
+_*.json
+_*.png
+_*.ps1
+*.log

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self';" />
+  <title>NAGIDD</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="aurora"></div>
+  <div class="win-border"></div>
+
+  <header class="topbar">
+    <div class="brand">
+      <img class="logo-img" src="mark.png" alt="NAGIDD" />
+      <span class="tag">NAGI OG DOWNLOADER</span>
+    </div>
+    <div class="top-actions">
+      <button id="btnFails" class="ghost-btn">Copiar fallos</button>
+      <button id="btnFolder" class="ghost-btn">Carpeta de descargas</button>
+      <div class="win-controls">
+        <button id="winMin" class="wc" title="Minimizar"><svg viewBox="0 0 12 12"><rect x="2" y="5.4" width="8" height="1.2"/></svg></button>
+        <button id="winMax" class="wc" title="Maximizar"><svg viewBox="0 0 12 12"><rect x="2.2" y="2.2" width="7.6" height="7.6" fill="none" stroke-width="1.2"/></svg></button>
+        <button id="winClose" class="wc close" title="Cerrar"><svg viewBox="0 0 12 12"><path d="M2.5 2.5 L9.5 9.5 M9.5 2.5 L2.5 9.5" stroke-width="1.3"/></svg></button>
+      </div>
+    </div>
+  </header>
+
+  <!-- VISTA: rejilla de modos -->
+  <main id="home" class="home">
+    <img class="hero-logo" src="mark.png" alt="NAGIDD" />
+    <h1 class="hero">Tu estudio de descargas <em>sin limites</em></h1>
+    <p class="hero-sub">MP3, video y playlists de cualquier web. Sin limites, sin marcas de agua, sin subir nada a internet. Todo en tu PC.</p>
+    <div id="grid" class="grid"></div>
+    <footer class="nagi-credit">
+      <img src="mark.png" width="20" height="20" alt="" />
+      <span>&copy; 2026 <strong>NAGI STUDIOS</strong></span>
+    </footer>
+  </main>
+
+  <!-- VISTA: modo de descarga -->
+  <section id="toolView" class="tool-view hidden">
+    <button id="backBtn" class="back">&larr; Volver</button>
+    <div class="tool-head">
+      <span id="toolIcon" class="tool-icon"></span>
+      <div>
+        <h2 id="toolTitle"></h2>
+        <p id="toolDesc"></p>
+      </div>
+    </div>
+
+    <div class="work">
+      <div class="opt-row">
+        <label id="inputLabel">Pega la URL:</label>
+        <input id="urlInput" type="text" placeholder="https://..." />
+        <textarea id="urlArea" class="tc-area hidden" placeholder="Un enlace por linea..."></textarea>
+      </div>
+
+      <div class="opt-row hidden" id="albumRow">
+        <label>Nombre del album / carpeta (opcional):</label>
+        <input id="albumInput" type="text" placeholder="Ej. Aqua - Aquarium" />
+      </div>
+
+      <div class="opt-row inline">
+        <label class="chk"><input type="checkbox" id="ckCookies" /> Privado / con login &mdash; usar cookies de:</label>
+        <select id="ckBrowser">
+          <option>Brave</option><option>Chrome</option><option>Edge</option><option>Firefox</option><option>Opera</option>
+        </select>
+      </div>
+
+      <div class="run-row">
+        <button id="runBtn" class="primary-btn big">DESCARGAR</button>
+        <span id="runHint" class="run-hint"></span>
+      </div>
+
+      <div class="log-box" id="logBox">
+        <div class="log-head">Registro</div>
+        <pre id="logPre"></pre>
+      </div>
+    </div>
+  </section>
+
+  <script src="renderer.js"></script>
+</body>
+</html>

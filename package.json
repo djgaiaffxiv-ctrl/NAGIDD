@@ -1,0 +1,54 @@
+{
+  "name": "nagidd",
+  "productName": "NAGIDD",
+  "version": "2.0.0",
+  "description": "NAGI OG DOWNLOADER - descargador de video/MP3 de cualquier web",
+  "main": "main.js",
+  "author": "NAGI STUDIOS",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder --win nsis"
+  },
+  "dependencies": {
+    "electron-updater": "^6.3.9"
+  },
+  "devDependencies": {
+    "electron": "^32.2.0",
+    "electron-builder": "^25.1.8"
+  },
+  "build": {
+    "appId": "com.nagistudios.nagidd",
+    "productName": "NAGIDD",
+    "copyright": "© 2026 NAGI STUDIOS",
+    "directories": { "output": "dist" },
+    "publish": [
+      { "provider": "github", "owner": "djgaiaffxiv-ctrl", "repo": "NAGIDD" }
+    ],
+    "files": [
+      "main.js",
+      "preload.js",
+      "lib/**/*",
+      "src/**/*",
+      "!**/*.ps1",
+      "!NAGIDD.ico",
+      "!NAGIDD.png",
+      "!nagi-mark.png"
+    ],
+    "extraResources": [
+      { "from": "bin", "to": "bin", "filter": ["**/*"] }
+    ],
+    "win": {
+      "target": "nsis",
+      "icon": "build/icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "NAGIDD",
+      "artifactName": "NAGIDD-Setup-${version}.exe"
+    }
+  }
+}
