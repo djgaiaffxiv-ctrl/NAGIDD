@@ -79,6 +79,7 @@ $('#runBtn').addEventListener('click', async () => {
   const btn = $('#runBtn');
   btn.disabled = true; btn.textContent = 'Trabajando...';
   $('#logPre').textContent = '';
+  $('#openBtn').classList.add('hidden');
 
   await window.nagi.download({
     urls, fmt: cur.fmt, multi: cur.multi, scrape: cur.scrape,
@@ -100,7 +101,25 @@ function appendLog(line) {
   pre.scrollTop = pre.scrollHeight;
 }
 window.nagi.onLog(appendLog);
-window.nagi.onDone(() => {});
+
+let doneFiles = [];
+window.nagi.onDone((d) => {
+  doneFiles = (d && d.files) || [];
+  const btn = $('#openBtn');
+  if (doneFiles.length === 1) {
+    btn.innerHTML = '&#9654; Ver';
+    btn.classList.remove('hidden');
+  } else if (doneFiles.length > 1) {
+    btn.innerHTML = '&#9654; Ver carpeta (' + doneFiles.length + ')';
+    btn.classList.remove('hidden');
+  } else {
+    btn.classList.add('hidden');
+  }
+});
+$('#openBtn').addEventListener('click', () => {
+  if (doneFiles.length === 1) window.nagi.openFile(doneFiles[0]);
+  else if (doneFiles.length > 1) window.nagi.openFolder();
+});
 
 // ---------- barra superior ----------
 $('#btnFails').addEventListener('click', () => window.nagi.copyFails());

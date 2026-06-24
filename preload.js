@@ -8,6 +8,7 @@ contextBridge.exposeInMainWorld('nagi', {
   pickCookies: () => ipcRenderer.invoke('pick-cookies'),
   copyFails: () => ipcRenderer.invoke('copy-fails'),
   openFolder: () => ipcRenderer.invoke('open-folder'),
+  openFile: (p) => ipcRenderer.invoke('open-file', p),
 
   // controles de ventana (frameless)
   winMinimize: () => ipcRenderer.invoke('win:minimize'),

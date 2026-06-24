@@ -95,9 +95,11 @@ ipcMain.handle('copy-fails', () => {
   log('Fallos copiados al portapapeles (y guardados en Descargas\\NAGIDD-fallos.txt).');
 });
 
+ipcMain.handle('open-file', (e, p) => { try { shell.openPath(p); } catch (_) {} });
+
 ipcMain.handle('download', async (e, payload) => {
   const res = await engine.runBatch(payload, log);
   lastFails = res.report || '';
-  win && win.webContents.send('done', { ok: res.ok, fail: res.fail });
+  win && win.webContents.send('done', { ok: res.ok, fail: res.fail, files: res.files || [] });
   return { ok: res.ok, fail: res.fail };
 });

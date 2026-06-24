@@ -280,3 +280,12 @@ body.maximized .win-border{border-radius:0;border-color:rgba(255,138,212,.25)}
 .nagi-credit img{ display:block; opacity:.95; border-radius:5px; }
 .nagi-credit strong{ color:#56BFC2; font-weight:700; letter-spacing:.09em; text-transform:uppercase; }
 .tool-icon{ line-height:1; }
+
+/* ===== NAGIDD: boton Ver (tras descargar) ===== */
+.open-btn{
+  background:linear-gradient(90deg,var(--mint),var(--cyan));
+  border:none;color:#06222b;font-weight:800;font-size:16px;cursor:pointer;
+  padding:14px 32px;border-radius:12px;transition:.18s;
+  box-shadow:0 6px 20px rgba(108,242,201,.35);
+}
+.open-btn:hover{filter:brightness(1.08);transform:translateY(-1px)}
