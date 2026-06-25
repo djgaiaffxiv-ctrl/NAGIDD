@@ -14,6 +14,14 @@ const X_SVG = `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
   <path fill="#f4ecff" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24h-6.65l-5.21-6.81-5.96 6.81H1.69l7.73-8.835L1.254 2.25H8.08l4.71 6.23 5.454-6.23zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>`;
 const FB_SVG = `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
   <path fill="#1877F2" d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07c0 6.02 4.39 11.01 10.13 11.93v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.68.24 2.68.24v2.97h-1.51c-1.49 0-1.96.93-1.96 1.89v2.25h3.33l-.53 3.49h-2.8v8.44C19.61 23.08 24 18.09 24 12.07z"/></svg>`;
+const GRID_SVG = `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <defs><linearGradient id="gridg" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#ff4fa3"/><stop offset=".5" stop-color="#9b5cff"/><stop offset="1" stop-color="#5ce1ff"/></linearGradient></defs>
+  <g fill="url(#gridg)">
+    <rect x="2" y="2" width="5.5" height="5.5" rx="1.4"/><rect x="9.25" y="2" width="5.5" height="5.5" rx="1.4"/><rect x="16.5" y="2" width="5.5" height="5.5" rx="1.4"/>
+    <rect x="2" y="9.25" width="5.5" height="5.5" rx="1.4"/><rect x="9.25" y="9.25" width="5.5" height="5.5" rx="1.4"/><rect x="16.5" y="9.25" width="5.5" height="5.5" rx="1.4"/>
+    <rect x="2" y="16.5" width="5.5" height="5.5" rx="1.4"/><rect x="9.25" y="16.5" width="5.5" height="5.5" rx="1.4"/><rect x="16.5" y="16.5" width="5.5" height="5.5" rx="1.4"/>
+  </g></svg>`;
 
 const MODES = [
   { id: 'mp3',     icon: '🎵', title: 'Descargar MP3',  desc: 'Una cancion a MP3 de maxima calidad.', fmt: 'mp3', multi: false, scrape: false },
@@ -22,6 +30,7 @@ const MODES = [
   { id: 'instagram', icon: IG_SVG, title: 'Instagram', desc: 'Fotos, videos, reels y stories. Privados: marca cookies.', fmt: 'instagram', multi: false, scrape: false },
   { id: 'facebook', icon: FB_SVG, title: 'Facebook', desc: 'Videos y reels de Facebook. Privados: marca cookies.', fmt: 'facebook', multi: false, scrape: false },
   { id: 'x',       icon: X_SVG, title: 'X / Twitter', desc: 'Video de un tweet. Privados/protegidos: marca cookies.', fmt: 'mp4', multi: false, scrape: false },
+  { id: 'perfil',  icon: GRID_SVG, title: 'Perfil completo', desc: 'TODAS las fotos y videos de un perfil de Instagram, X o Facebook. Privados: marca cookies.', badge: 'NUEVO', fire: true, fmt: 'perfil', multi: true, scrape: false },
   { id: 'lista',   icon: '📋', title: 'Lista de videos', desc: 'Pega muchos enlaces y los descarga todos a MP4.', badge: 'NUEVO', fmt: 'mp4', multi: true, scrape: false },
   { id: 'galeria', icon: '🗃️', title: 'Galeria → videos', desc: 'Pega la URL de una pagina y baja TODOS sus videos.', badge: 'NUEVO', fmt: 'mp4', multi: true, scrape: true }
 ];
