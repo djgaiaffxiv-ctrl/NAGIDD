@@ -29,7 +29,7 @@ const MODES = [
   { id: 'video',   icon: '🎬', title: 'Descargar video', desc: 'Un video a MP4 de maxima calidad.', fmt: 'mp4', multi: false, scrape: false },
   { id: 'instagram', icon: IG_SVG, title: 'Instagram', desc: 'Fotos, videos, reels y stories. Privados: marca cookies.', fmt: 'instagram', multi: false, scrape: false },
   { id: 'facebook', icon: FB_SVG, title: 'Facebook', desc: 'Videos y reels de Facebook. Privados: marca cookies.', fmt: 'facebook', multi: false, scrape: false },
-  { id: 'x',       icon: X_SVG, title: 'X / Twitter', desc: 'Video de un tweet. Privados/protegidos: marca cookies.', fmt: 'mp4', multi: false, scrape: false },
+  { id: 'x',       icon: X_SVG, title: 'X / Twitter', desc: 'Video de un tweet, o un perfil entero. Privados: marca cookies.', fmt: 'x', multi: false, scrape: false },
   { id: 'perfil',  icon: GRID_SVG, title: 'Perfil completo', desc: 'TODAS las fotos y videos de un perfil de Instagram, X o Facebook. Privados: marca cookies.', badge: 'NUEVO', fire: true, fmt: 'perfil', multi: true, scrape: false },
   { id: 'lista',   icon: '📋', title: 'Lista de videos', desc: 'Pega muchos enlaces y los descarga todos a MP4.', badge: 'NUEVO', fmt: 'mp4', multi: true, scrape: false },
   { id: 'galeria', icon: '🗃️', title: 'Galeria → videos', desc: 'Pega la URL de una pagina y baja TODOS sus videos.', badge: 'NUEVO', fmt: 'mp4', multi: true, scrape: true }
