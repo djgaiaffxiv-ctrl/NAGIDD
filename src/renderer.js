@@ -1,10 +1,24 @@
 'use strict';
 const $ = (s) => document.querySelector(s);
 
+// Iconos de marca (SVG)
+const IG_SVG = `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <defs><linearGradient id="iggrad" x1="0" y1="1" x2="1" y2="0">
+    <stop offset="0" stop-color="#feda75"/><stop offset=".28" stop-color="#fa7e1e"/>
+    <stop offset=".6" stop-color="#d62976"/><stop offset=".85" stop-color="#962fbf"/>
+    <stop offset="1" stop-color="#4f5bd5"/></linearGradient></defs>
+  <rect x="2" y="2" width="20" height="20" rx="6" fill="none" stroke="url(#iggrad)" stroke-width="2.1"/>
+  <circle cx="12" cy="12" r="5" fill="none" stroke="url(#iggrad)" stroke-width="2.1"/>
+  <circle cx="17.6" cy="6.4" r="1.5" fill="url(#iggrad)"/></svg>`;
+const X_SVG = `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <path fill="#f4ecff" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24h-6.65l-5.21-6.81-5.96 6.81H1.69l7.73-8.835L1.254 2.25H8.08l4.71 6.23 5.454-6.23zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>`;
+
 const MODES = [
   { id: 'mp3',     icon: '🎵', title: 'Descargar MP3',  desc: 'Una cancion a MP3 de maxima calidad.', fmt: 'mp3', multi: false, scrape: false },
   { id: 'plist',   icon: '💿', title: 'Playlist a MP3', desc: 'Una playlist entera a MP3, numerada y en su carpeta.', badge: 'TOP', fire: true, fmt: 'mp3', multi: false, scrape: false, album: true },
   { id: 'video',   icon: '🎬', title: 'Descargar video', desc: 'Un video a MP4 de maxima calidad.', fmt: 'mp4', multi: false, scrape: false },
+  { id: 'instagram', icon: IG_SVG, title: 'Instagram', desc: 'Fotos, videos, reels y stories (marca cookies para privados).', fmt: 'instagram', multi: false, scrape: false },
+  { id: 'x',       icon: X_SVG, title: 'X / Twitter', desc: 'Descarga el video de un tweet.', fmt: 'mp4', multi: false, scrape: false },
   { id: 'lista',   icon: '📋', title: 'Lista de videos', desc: 'Pega muchos enlaces y los descarga todos a MP4.', badge: 'NUEVO', fmt: 'mp4', multi: true, scrape: false },
   { id: 'galeria', icon: '🗃️', title: 'Galeria → videos', desc: 'Pega la URL de una pagina y baja TODOS sus videos.', badge: 'NUEVO', fmt: 'mp4', multi: true, scrape: true }
 ];
@@ -39,7 +53,7 @@ MODES.forEach((m) => {
 // ---------- navegacion ----------
 function openTool(m) {
   cur = m;
-  $('#toolIcon').textContent = m.icon;
+  $('#toolIcon').innerHTML = m.icon;
   $('#toolTitle').textContent = m.title;
   $('#toolDesc').textContent = m.desc;
 
