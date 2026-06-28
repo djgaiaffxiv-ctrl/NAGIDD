@@ -10,6 +10,11 @@ contextBridge.exposeInMainWorld('nagi', {
   openFolder: () => ipcRenderer.invoke('open-folder'),
   openFile: (p) => ipcRenderer.invoke('open-file', p),
 
+  // servidor movil
+  mobileStart: () => ipcRenderer.invoke('mobile:start'),
+  mobileStop: () => ipcRenderer.invoke('mobile:stop'),
+  mobileStatus: () => ipcRenderer.invoke('mobile:status'),
+
   // controles de ventana (frameless)
   winMinimize: () => ipcRenderer.invoke('win:minimize'),
   winMaximize: () => ipcRenderer.invoke('win:maximize'),

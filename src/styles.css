@@ -289,3 +289,21 @@ body.maximized .win-border{border-radius:0;border-color:rgba(255,138,212,.25)}
   box-shadow:0 6px 20px rgba(108,242,201,.35);
 }
 .open-btn:hover{filter:brightness(1.08);transform:translateY(-1px)}
+
+/* ===== NAGIDD: panel acceso movil ===== */
+.modal{position:fixed;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;
+  background:rgba(6,3,16,.72);backdrop-filter:blur(4px)}
+.modal.hidden{display:none}
+.modal-box{position:relative;width:min(420px,92vw);background:linear-gradient(180deg,#1a1030,#140c26);
+  border:1px solid var(--card-brd);border-radius:20px;padding:26px 26px 24px;text-align:center;
+  box-shadow:0 20px 60px rgba(0,0,0,.55)}
+.modal-box h2{margin:0 0 6px;font-size:21px;
+  background:linear-gradient(90deg,var(--pink),var(--purple),var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent}
+.modal-sub{color:var(--muted);font-size:13px;line-height:1.5;margin:0 0 16px}
+.modal-x{position:absolute;top:12px;right:14px;background:none;border:none;color:var(--muted);
+  font-size:26px;line-height:1;cursor:pointer}
+.modal-x:hover{color:var(--text)}
+.qr-box{width:208px;height:208px;margin:6px auto 14px;background:#fff;border-radius:14px;padding:12px;display:grid;place-items:center}
+.qr-box img,.qr-box canvas{display:block}
+.qr-url{font-size:13px;color:var(--muted);margin:0 0 16px}
+.qr-url a{color:var(--cyan);font-weight:700;font-size:16px;word-break:break-all;text-decoration:none}

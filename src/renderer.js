@@ -154,3 +154,34 @@ $('#winMin').addEventListener('click', () => window.nagi.winMinimize());
 $('#winMax').addEventListener('click', () => window.nagi.winMaximize());
 $('#winClose').addEventListener('click', () => window.nagi.winClose());
 window.nagi.onWinState((max) => document.body.classList.toggle('maximized', max));
+
+// ---------- acceso movil ----------
+const mModal = $('#mobileModal');
+function showMobileState(st) {
+  const on = st && st.running;
+  $('#mobileOff').classList.toggle('hidden', on);
+  $('#mobileOn').classList.toggle('hidden', !on);
+  const box = $('#qr'); box.innerHTML = '';
+  if (on) {
+    $('#mobileUrl').textContent = st.url;
+    $('#mobileUrl').href = st.url;
+    try { new QRCode(box, { text: st.url, width: 184, height: 184, colorDark: '#0b0717', colorLight: '#ffffff', correctLevel: QRCode.CorrectLevel.M }); } catch (_) {}
+  }
+}
+$('#btnMobile').addEventListener('click', async () => {
+  mModal.classList.remove('hidden');
+  showMobileState(await window.nagi.mobileStatus());
+});
+$('#mobileClose').addEventListener('click', () => mModal.classList.add('hidden'));
+mModal.addEventListener('click', (e) => { if (e.target === mModal) mModal.classList.add('hidden'); });
+$('#mobileToggleOn').addEventListener('click', async () => {
+  const b = $('#mobileToggleOn'); b.disabled = true; b.textContent = 'Encendiendo...';
+  const st = await window.nagi.mobileStart();
+  b.disabled = false; b.innerHTML = 'Encender acceso móvil';
+  if (st && st.running) showMobileState(st);
+  else appendLog('No se pudo iniciar el servidor movil' + (st && st.error ? ': ' + st.error : ''));
+});
+$('#mobileToggleOff').addEventListener('click', async () => {
+  await window.nagi.mobileStop();
+  showMobileState({ running: false });
+});

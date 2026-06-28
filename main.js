@@ -5,6 +5,7 @@ const { app, BrowserWindow, ipcMain, shell, clipboard, dialog } = require('elect
 const path = require('path');
 const fs = require('fs');
 const engine = require('./lib/engine');
+const mobile = require('./lib/mobile');
 
 let win;
 let lastFails = '';
@@ -96,6 +97,15 @@ ipcMain.handle('copy-fails', () => {
 });
 
 ipcMain.handle('open-file', (e, p) => { try { shell.openPath(p); } catch (_) {} });
+
+// ---------- Servidor movil (escuchar/descargar la carpeta desde el telefono) ----------
+ipcMain.handle('mobile:start', async () => {
+  try { const i = await mobile.start(engine.OUT, 8770); log('Servidor movil activo en ' + i.url); return i; }
+  catch (e) { log('No pude iniciar el servidor movil: ' + e.message); return { running: false, error: e.message }; }
+});
+ipcMain.handle('mobile:stop', () => { mobile.stop(); log('Servidor movil apagado.'); return { running: false }; });
+ipcMain.handle('mobile:status', () => mobile.status());
+app.on('before-quit', () => { try { mobile.stop(); } catch (_) {} });
 
 ipcMain.handle('download', async (e, payload) => {
   const res = await engine.runBatch(payload, log);
