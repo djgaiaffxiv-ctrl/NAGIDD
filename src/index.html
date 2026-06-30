@@ -62,6 +62,15 @@
         <input id="albumInput" type="text" placeholder="Ej. Aqua - Aquarium" />
       </div>
 
+      <div class="opt-row hidden" id="trimRow">
+        <label class="chk"><input type="checkbox" id="ckTrim" /> Descargar solo un trozo (recortar por tiempo)</label>
+        <div class="trim-fields hidden" id="trimFields">
+          <span>Desde <input id="trimStart" class="time-in" type="text" placeholder="0:00" /></span>
+          <span>hasta <input id="trimEnd" class="time-in" type="text" placeholder="final" /></span>
+          <span class="hint">formato min:seg (ej. 1:30). Deja vac&iacute;o = principio / final.</span>
+        </div>
+      </div>
+
       <div class="opt-row inline">
         <label class="chk"><input type="checkbox" id="ckCookies" /> Privado / con login &mdash; usar cookies de:</label>
         <select id="ckBrowser">

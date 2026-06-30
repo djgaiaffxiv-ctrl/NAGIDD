@@ -24,12 +24,12 @@ const GRID_SVG = `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
   </g></svg>`;
 
 const MODES = [
-  { id: 'mp3',     icon: '🎵', title: 'Descargar MP3',  desc: 'Una cancion a MP3 de maxima calidad.', fmt: 'mp3', multi: false, scrape: false },
+  { id: 'mp3',     icon: '🎵', title: 'Descargar MP3',  desc: 'Una cancion a MP3 de maxima calidad.', fmt: 'mp3', multi: false, scrape: false, trim: true },
   { id: 'plist',   icon: '💿', title: 'Playlist a MP3', desc: 'Una playlist entera a MP3, numerada y en su carpeta.', badge: 'TOP', fire: true, fmt: 'mp3', multi: false, scrape: false, album: true },
-  { id: 'video',   icon: '🎬', title: 'Descargar video', desc: 'Un video a MP4 de maxima calidad.', fmt: 'mp4', multi: false, scrape: false },
+  { id: 'video',   icon: '🎬', title: 'Descargar video', desc: 'Un video a MP4 de maxima calidad.', fmt: 'mp4', multi: false, scrape: false, trim: true },
   { id: 'instagram', icon: IG_SVG, title: 'Instagram', desc: 'Fotos, videos, reels y stories. Privados: marca cookies.', fmt: 'instagram', multi: false, scrape: false },
   { id: 'facebook', icon: FB_SVG, title: 'Facebook', desc: 'Videos y reels de Facebook. Privados: marca cookies.', fmt: 'facebook', multi: false, scrape: false },
-  { id: 'x',       icon: X_SVG, title: 'X / Twitter', desc: 'Video de un tweet, o un perfil entero. Privados: marca cookies.', fmt: 'x', multi: false, scrape: false },
+  { id: 'x',       icon: X_SVG, title: 'X / Twitter', desc: 'Video de un tweet, o un perfil entero. Privados: marca cookies.', fmt: 'x', multi: false, scrape: false, trim: true },
   { id: 'perfil',  icon: GRID_SVG, title: 'Perfil completo', desc: 'TODAS las fotos y videos de un perfil de Instagram, X o Facebook. Privados: marca cookies.', badge: 'NUEVO', fire: true, fmt: 'perfil', multi: true, scrape: false },
   { id: 'lista',   icon: '📋', title: 'Lista de videos', desc: 'Pega muchos enlaces y los descarga todos a MP4.', badge: 'NUEVO', fmt: 'mp4', multi: true, scrape: false },
   { id: 'galeria', icon: '🗃️', title: 'Galeria → videos', desc: 'Pega la URL de una pagina y baja TODOS sus videos.', badge: 'NUEVO', fmt: 'mp4', multi: true, scrape: true }
@@ -48,6 +48,11 @@ $('#ckBrowser').addEventListener('change', async (e) => {
   } else {
     cookieFile = ''; $('#ckFile').textContent = '';
   }
+});
+
+// recorte: la casilla muestra/oculta los campos de tiempo
+$('#ckTrim').addEventListener('change', (e) => {
+  $('#trimFields').classList.toggle('hidden', !e.target.checked);
 });
 
 // ---------- rejilla ----------
@@ -81,6 +86,10 @@ function openTool(m) {
   }
   $('#albumRow').classList.toggle('hidden', !m.album);
   if (m.album) $('#albumInput').value = '';
+  $('#trimRow').classList.toggle('hidden', !m.trim);
+  $('#ckTrim').checked = false;
+  $('#trimFields').classList.add('hidden');
+  $('#trimStart').value = ''; $('#trimEnd').value = '';
   $('#logPre').textContent = 'Listo. Pega y pulsa DESCARGAR.\n';
   $('#home').classList.add('hidden');
   $('#toolView').classList.remove('hidden');
@@ -107,9 +116,11 @@ $('#runBtn').addEventListener('click', async () => {
   $('#logPre').textContent = '';
   $('#openBtn').classList.add('hidden');
 
+  const useTrim = cur.trim && $('#ckTrim').checked;
   await window.nagi.download({
     urls, fmt: cur.fmt, multi: cur.multi, scrape: cur.scrape,
     album: cur.album ? $('#albumInput').value : '',
+    trim: useTrim ? { start: $('#trimStart').value, end: $('#trimEnd').value } : null,
     cookies: {
       enabled: $('#ckCookies').checked,
       browser: $('#ckBrowser').value === 'file' ? 'brave' : $('#ckBrowser').value,
